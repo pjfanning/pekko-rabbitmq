@@ -51,6 +51,13 @@ developers := List(
   Developer(id="pjfanning", name="PJ Fanning", email="", url=url("https://github.com/pjfanning"))
 )
 
+scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/pjfanning/akka-rabbitmq"),
+    "scm:git@github.com:pjfanning/akka-rabbitmq.git"
+  )
+)
+
 publishMavenStyle := true
 publishTo := {
   val nexus = "https://oss.sonatype.org/"
