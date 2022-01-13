@@ -1,9 +1,10 @@
 # Akka RabbitMQ client [![Build Status](https://secure.travis-ci.org/NewMotion/akka-rabbitmq.svg)](http://travis-ci.org/NewMotion/akka-rabbitmq)
 
-This small library allows you use [RabbitMQ client](http://www.rabbitmq.com/java-client.html) via [Akka Actors](http://akka.io).
-The main idea implemented in library is to survive losing connection with RabbitMQ server
+This small library allows you to use [RabbitMQ client](https://www.rabbitmq.com/java-client.html) via [Akka Actors](https://akka.io).
 
-It gives you two actors `ConnectionActor` and `ChannelActor`
+This is a fork of [NewMotion/akka-rabbitmq](https://github.com/NewMotion/akka-rabbitmq) but adds Scala 3 support.
+
+It gives you two actors `ConnectionActor` and `ChannelActor`.
 
 ### ConnectionActor
 * handles connection failures and notifies children
@@ -24,36 +25,16 @@ using confirms can be found in this project under [ConfirmsExample.scala](https:
 ## Setup
 
 ### Sbt
-Since version `3.0.0`:
 ``` scala
-libraryDependencies += "com.newmotion" %% "akka-rabbitmq" % "6.0.2"
+libraryDependencies += "com.github.pjfanning" %% "akka-rabbitmq" % "6.1.0"
 ```
 
 ### Maven
-Since version `6.0.0`
 ```xml
 <dependency>
-    <groupId>com.newmotion</groupId>
-    <artifactId>akka-rabbitmq_{2.12/2.13}</artifactId>
-    <version>6.0.2</version>
-</dependency>
-```
-
-Since version `4.0.0`
-```xml
-<dependency>
-    <groupId>com.newmotion</groupId>
-    <artifactId>akka-rabbitmq_{2.12/2.13}</artifactId>
-    <version>5.0.4-beta</version>
-</dependency>
-```
-
-Since version `3.0.0`
-```xml
-<dependency>
-    <groupId>com.thenewmotion</groupId>
-    <artifactId>akka-rabbitmq_{2.11/2.12}</artifactId>
-    <version>3.0.0</version>
+    <groupId>com.github.pjfanning</groupId>
+    <artifactId>akka-rabbitmq_{2.12/2.13/3}</artifactId>
+    <version>6.1.0</version>
 </dependency>
 ```
 
@@ -237,82 +218,7 @@ using the login and password of guest and guest.
 
 ## Changelog
 
-### 6.0.3-SNAPSHOT
-
-#### Code Updates
-
-* Fully qualified the package directory structures as com.newmotion...
-* Merged PR #66 with Scala 3 compatibility changes
-* Cleaned up many warning messages that were found with IntelliJ 2021.2
-* Updated the Prop constructors
-* Updated deprecated setTimer() calls to startSingleTimer() in ConnectionActor.scala
-
-* Upgraded to Scala 2.13.6
-* Upgraded to SBT 1.5.5 and cleaned deprecated issues
-* Updated to latest dependencies:
-    * ampq-client: 5.9.0 -> 5.13.1
-    * com.typesafe .config: 1.4.0 -> 1.4.1
-    * org.specs2.specs2-mock: 4.10.3 -> 4.13.0
-
-### 6.0.0
- * Drop support of Scala 2.11
- * Update dependencies:
- 
-    * amqp-client: 5.7.3 -> 5.9.0
-    * akka: 2.5.+ -> 2.6.+
-
-### 5.1.2
-
- * Update to latest dependencies:
-
-     * amqp-client: 5.7.1 -> 5.7.3
-     * Typesafe Config: 1.3.4 -> 1.4.0
-     * Specs2: 4.5.1 -> 4.8.1
-     * SBT: 1.2.8 -> 1.3.4
-     * sbt-build-seed: 5.0.1 -> 5.0.4
-     * sbt-sonatype: 2.3 -> 3.8.1
-
-### 5.0.4-beta
-
- * Fix: proper error handling of close channel and create channel
- * Fix: proper error handling of setup connection/channel callbacks
- * Fix: if callback exception is uncaught, close connection/channel
- * Fix: take into account blocking nature of new connection/channel
- * Fix: close channel if the channel actor never got it (deadletter)
- * Fix: channel actor shouldn't ask for channel after a connection shutdown
- * If unexpectedly received a new channel, close it and use the old instead
- * Log warning when a message isn't retried any longer + more debug logging
- * Update to latest dependencies:
-
-     * Akka: 2.5.8 -> 2.5.+ (provided)
-     * amqp-client: 5.1.1 -> 5.4.2
-     * Typesafe Config: 1.3.2 -> 1.3.3
-     * Specs2: 4.0.2 -> 4.3.4
-     * SBT: 1.0.3 -> 1.2.3
-     * sbt-build-seed: 4.0.2 -> 4.1.2
-     * sbt-sonatype: 2.0 -> 2.3
-
-### 5.0.2
-
- * Supersedes version 5.0.1 which has been withdrawn to investigate some unforeseen issues
-
-### 5.0.0
-
- * Update to latest dependencies:
-
-     * Akka: 2.4.14 -> 2.5.8
-     * amqp-client: 4.0.0 -> 5.1.1
-     * Typesafe Config: 1.3.1 -> 1.3.2
-     * Specs2: 3.8.6 -> 4.0.2
-     * SBT: 0.13.13 -> 1.0.3
-     * sbt-build-seed: 2.1.0 -> 4.0.2
-     * sbt-scalariform: 1.3.0 -> 1.8.2
-     * sbt-sonatype: 1.1 -> 2.0
-     * sbt-pgp: 1.0.0 -> 1.1.0
-
-### 4.0.0
-
- * Change organization from `com.thenewmotion` to `com.newmotion`
+[Releases](https://github.com/pjfanning/akka-rabbitmq/releases)
 
 ## Other Libraries
 
