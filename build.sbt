@@ -7,9 +7,9 @@ licenses := Seq(
 
 homepage := Some(new URL("https://github.com/pjfanning/akka-rabbitmq"))
 
-scalaVersion := "2.13.8"
+ThisBuild / scalaVersion := "2.13.8"
 
-crossScalaVersions := Seq("2.13.8", "2.12.15", "3.1.1-RC2")
+ThisBuild / crossScalaVersions := Seq("2.13.8", "2.12.15", "3.1.1-RC2")
 
 def akka(name: String): ModuleID = "com.typesafe.akka" %% s"akka-$name" % "2.6.+"
 
@@ -42,3 +42,12 @@ Test / unmanagedSourceDirectories ++= {
 }
 
 Format.settings
+
+publishMavenStyle := true
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+}
