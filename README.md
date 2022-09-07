@@ -1,5 +1,7 @@
 # Akka RabbitMQ client [![Build Status](https://secure.travis-ci.org/NewMotion/akka-rabbitmq.svg)](http://travis-ci.org/NewMotion/akka-rabbitmq)
 
+:warning: This project is being ramped down due to Akka's move away from [Open Source](https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka).
+
 This small library allows you to use [RabbitMQ client](https://www.rabbitmq.com/java-client.html) via [Akka Actors](https://akka.io).
 
 This is a fork of [NewMotion/akka-rabbitmq](https://github.com/NewMotion/akka-rabbitmq) but adds Scala 3 support.
