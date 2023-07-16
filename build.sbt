@@ -7,14 +7,14 @@ licenses := Seq(
 
 homepage := Some(new URL("https://github.com/pjfanning/akka-rabbitmq"))
 
-ThisBuild / scalaVersion := "2.13.8"
+ThisBuild / scalaVersion := "2.13.11"
 
-ThisBuild / crossScalaVersions := Seq("2.13.8", "2.12.15", "3.1.1")
+ThisBuild / crossScalaVersions := Seq("2.13.11", "2.12.17", "3.2.2")
 
 def akka(name: String): ModuleID = "com.typesafe.akka" %% s"akka-$name" % "2.6.+"
 
 libraryDependencies ++= Seq(
-  "com.rabbitmq" % "amqp-client" % "5.14.2",
+  "com.rabbitmq" % "amqp-client" % "5.14.3",
   akka("actor") % "provided",
   akka("testkit") % "test",
   "com.typesafe" % "config" % "1.4.2" % Test,
