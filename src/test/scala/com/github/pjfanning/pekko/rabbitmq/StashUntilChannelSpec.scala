@@ -1,7 +1,7 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
-import akka.actor.{ Props, Actor, ActorRef, Terminated }
-import akka.testkit._
+import org.apache.pekko.actor.{ Props, Actor, ActorRef, Terminated }
+import org.apache.pekko.testkit._
 
 class StashUntilChannelSpec extends ActorSpec {
   "StashUntilChannel" should {

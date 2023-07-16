@@ -1,22 +1,22 @@
 organization := "com.github.pjfanning"
-name := "akka-rabbitmq"
+name := "pekko-rabbitmq"
 
 licenses := Seq(
   ("Apache License, Version 2.0",
    url("http://www.apache.org/licenses/LICENSE-2.0")))
 
-homepage := Some(new URL("https://github.com/pjfanning/akka-rabbitmq"))
+homepage := Some(new URL("https://github.com/pjfanning/pekko-rabbitmq"))
 
 ThisBuild / scalaVersion := "2.13.11"
 
-ThisBuild / crossScalaVersions := Seq("2.13.11", "2.12.18", "3.2.2")
+ThisBuild / crossScalaVersions := Seq("2.13.11", "2.12.18", "3.3.0")
 
-def akka(name: String): ModuleID = "com.typesafe.akka" %% s"akka-$name" % "2.6.+"
+def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.0.0"
 
 libraryDependencies ++= Seq(
   "com.rabbitmq" % "amqp-client" % "5.14.3",
-  akka("actor") % "provided",
-  akka("testkit") % "test",
+  pekko("actor") % "provided",
+  pekko("testkit") % "test",
   "com.typesafe" % "config" % "1.4.2" % Test,
   ("org.specs2" %% "specs2-mock" % "4.13.3" % Test).cross(CrossVersion.for3Use2_13)
 )
@@ -53,8 +53,8 @@ developers := List(
 
 scmInfo := Some(
   ScmInfo(
-    url("https://github.com/pjfanning/akka-rabbitmq"),
-    "scm:git@github.com:pjfanning/akka-rabbitmq.git"
+    url("https://github.com/pjfanning/pekko-rabbitmq"),
+    "scm:git@github.com:pjfanning/pekko-rabbitmq.git"
   )
 )
 

@@ -1,6 +1,6 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
-import akka.actor.{ ActorRef, DeadLetter, FSM, Props }
+import org.apache.pekko.actor.{ ActorRef, DeadLetter, FSM, Props }
 
 import concurrent.duration._
 import scala.concurrent.{ ExecutionContext, ExecutionContextExecutor, Future, blocking }
@@ -28,7 +28,7 @@ object ConnectionActor {
   case class NewConnection(connection: Connection) extends Message
   case class SetupChildren(refs: Iterable[ActorRef]) extends Message
 
-  final val DefaultDispatcherId = "akka-rabbitmq.default-connection-dispatcher"
+  final val DefaultDispatcherId = "pekko-rabbitmq.default-connection-dispatcher"
 
   // For binary compatibility reasons, this version of props is still here
   def props(

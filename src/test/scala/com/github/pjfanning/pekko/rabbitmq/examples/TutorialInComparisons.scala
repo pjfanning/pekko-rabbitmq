@@ -1,7 +1,8 @@
-package com.newmotion.akka.rabbitmq
-package examples
+package com.github.pjfanning.pekko.rabbitmq.examples
 
-import akka.actor.{ Actor, ActorRef, Props, ActorSystem }
+import org.apache.pekko.actor.{Actor, ActorRef, ActorSystem, Props}
+import com.github.pjfanning.pekko.rabbitmq.{ChannelActor, ConnectionActor}
+
 import scala.concurrent.Await
 import scala.concurrent.duration._
 

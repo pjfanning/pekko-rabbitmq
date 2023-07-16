@@ -1,8 +1,8 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
 import scala.util._
-import akka.actor.Actor
-import akka.event.LoggingAdapter
+import org.apache.pekko.actor.Actor
+import org.apache.pekko.event.LoggingAdapter
 import com.rabbitmq.client.{ ShutdownListener, ShutdownSignalException }
 import java.io.IOException
 import java.util.concurrent.TimeoutException

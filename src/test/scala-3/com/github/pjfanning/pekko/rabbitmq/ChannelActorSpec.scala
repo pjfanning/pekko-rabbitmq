@@ -1,14 +1,16 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
 import org.specs2.mock.Mockito
-import akka.testkit.TestFSMRef
-import akka.actor.ActorRef
+import org.apache.pekko.testkit.TestFSMRef
+import org.apache.pekko.actor.ActorRef
 import ChannelActor._
 import com.rabbitmq.client.ShutdownSignalException
 
 import collection.immutable.Queue
 import java.io.IOException
 import ConnectionActor.ProvideChannel
+
+import scala.reflect.ClassTag
 
 /**
  * @author Yaroslav Klymko
@@ -116,7 +118,7 @@ class ChannelActorSpec extends ActorSpec with Mockito {
   }
 
   private abstract class TestScope extends ActorScope {
-    val setupChannel: (Channel, ActorRef) => Unit = mock[(Channel, ActorRef) => Unit]
+    val setupChannel: (Channel, ActorRef) => Unit = mock[(Channel, ActorRef) => Unit](ClassTag(classOf[(Channel, ActorRef) => Unit]))
     val onChannel: OnChannel = mock[OnChannel]
     val channel: Channel = {
       val channel = mock[Channel]

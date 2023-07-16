@@ -1,7 +1,7 @@
-package com.newmotion.akka.rabbitmq
-package examples
+package com.github.pjfanning.pekko.rabbitmq.examples
 
-import akka.actor.{ ActorRef, ActorSystem }
+import org.apache.pekko.actor.{ActorRef, ActorSystem}
+import com.github.pjfanning.pekko.rabbitmq.{ChannelActor, ConnectionActor}
 
 import concurrent.Future
 import concurrent.ExecutionContext.Implicits.global
@@ -13,7 +13,7 @@ import scala.annotation.tailrec
 object PublishSubscribe extends App {
   implicit val system: ActorSystem = ActorSystem()
   val factory = new ConnectionFactory()
-  val connection = system.actorOf(ConnectionActor.props(factory), "akka-rabbitmq")
+  val connection = system.actorOf(ConnectionActor.props(factory), "pekko-rabbitmq")
   val exchange = "amq.fanout"
 
   def setupPublisher(channel: Channel, self: ActorRef) = {

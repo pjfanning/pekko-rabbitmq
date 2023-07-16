@@ -1,7 +1,7 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
 import java.util.concurrent.TimeUnit
-import akka.actor.ActorRef
+import org.apache.pekko.actor.ActorRef
 import ChannelActor.Connected
 import ChannelActor.GetState
 import com.rabbitmq.client.AMQP.Queue
@@ -18,13 +18,13 @@ class PublishSubscribeSpec extends ActorSpec {
 
     "Publish and Subscribe" in new TestScope {
       val factory = new ConnectionFactory()
-      val config: Config = com.typesafe.config.ConfigFactory.load().getConfig("akka-rabbitmq")
+      val config: Config = com.typesafe.config.ConfigFactory.load().getConfig("pekko-rabbitmq")
       factory.setHost(config.getString("host"))
       factory.setPort(config.getInt("port"))
       factory.setUsername(config.getString("username"))
       factory.setPassword(config.getString("password"))
 
-      val connection: ActorRef = system.actorOf(ConnectionActor.props(factory), "akka-rabbitmq")
+      val connection: ActorRef = system.actorOf(ConnectionActor.props(factory), "pekko-rabbitmq")
       val exchange = "amq.fanout"
 
       def setupPublisher(channel: Channel, self: ActorRef): Queue.BindOk = {

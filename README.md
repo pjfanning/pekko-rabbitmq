@@ -1,10 +1,9 @@
-# Akka RabbitMQ client
+# Pekko RabbitMQ client
 
-:warning: This project is being ramped down due to Akka's move away from [Open Source](https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka).
+This small library allows you to use [RabbitMQ client](https://www.rabbitmq.com/java-client.html) via [Apache Pekko Actors](https://pekko.apache.org).
 
-This small library allows you to use [RabbitMQ client](https://www.rabbitmq.com/java-client.html) via [Akka Actors](https://akka.io).
-
-This is a fork of [NewMotion/akka-rabbitmq](https://github.com/NewMotion/akka-rabbitmq) but adds Scala 3 support.
+This is a fork of [pjfanning/pekko-rabbitmq](https://github.com/pjfanning/pekko-rabbitmq), which itself is a fork of
+[NewMotion/pekko-rabbitmq](https://github.com/NewMotion/pekko-rabbitmq).
 
 It gives you two actors `ConnectionActor` and `ChannelActor`.
 
@@ -21,22 +20,21 @@ It gives you two actors `ConnectionActor` and `ChannelActor`.
 Please note that while this library transparently reconnects when a connection fails, it **cannot guarantee** that no
 messages will be lost. If you want to make sure every message is delivered, you have to use acknowledgements
 and confirms. This is documented
-[in the RabbitMQ Reliability Guide](https://www.rabbitmq.com/reliability.html#connection-failures). An example program
-using confirms can be found in this project under [ConfirmsExample.scala](https://github.com/NewMotion/akka-rabbitmq/blob/master/src/test/scala/akka/rabbitmq/examples/ConfirmsExample.scala).
+[in the RabbitMQ Reliability Guide](https://www.rabbitmq.com/reliability.html#connection-failures). 
 
 ## Setup
 
 ### Sbt
 ``` scala
-libraryDependencies += "com.github.pjfanning" %% "akka-rabbitmq" % "6.1.0"
+libraryDependencies += "com.github.pjfanning" %% "pekko-rabbitmq" % "7.0.0"
 ```
 
 ### Maven
 ```xml
 <dependency>
     <groupId>com.github.pjfanning</groupId>
-    <artifactId>akka-rabbitmq_{2.12/2.13/3}</artifactId>
-    <version>6.1.0</version>
+    <artifactId>pekko-rabbitmq_{2.12/2.13/3}</artifactId>
+    <version>7.0.0</version>
 </dependency>
 ```
 
@@ -44,7 +42,7 @@ libraryDependencies += "com.github.pjfanning" %% "akka-rabbitmq" % "6.1.0"
 Before start, you need to add import statement
 
 ```scala
-    import com.newmotion.akka.rabbitmq._
+    import com.github.pjfanning.pekko.rabbitmq._
 ```
 
 ### Create connection
@@ -166,11 +164,11 @@ You can shutdown `ActorSystem`, this will close all connections as well as chann
 Here is [RabbitMQ Publish/Subscribe](http://www.rabbitmq.com/tutorials/tutorial-three-java.html) in actors style
 
 ```scala
-import akka.actor.ActorSystem
+import org.apache.pekko.actor.ActorSystem
 object PublishSubscribe extends App {
   implicit val system: ActorSystem = ActorSystem()
   val factory = new ConnectionFactory()
-  val connection = system.actorOf(ConnectionActor.props(factory), "akka-rabbitmq")
+  val connection = system.actorOf(ConnectionActor.props(factory), "pekko-rabbitmq")
   val exchange = "amq.fanout"
 
   def setupPublisher(channel: Channel, self: ActorRef) = {
@@ -193,7 +191,7 @@ object PublishSubscribe extends App {
 
   Future {
     def loop(n: Long) = {
-      val publisher = system.actorSelection("/user/akka-rabbitmq/publisher")
+      val publisher = system.actorSelection("/user/pekko-rabbitmq/publisher")
 
       def publish(channel: Channel) = {
         channel.basicPublish(exchange, "", null, toBytes(n))
@@ -220,8 +218,9 @@ using the login and password of guest and guest.
 
 ## Changelog
 
-[Releases](https://github.com/pjfanning/akka-rabbitmq/releases)
+[Releases](https://github.com/pjfanning/pekko-rabbitmq/releases)
 
 ## Other Libraries
 
-Akka-RabbitMQ is a low-level library, and leaves it to the coder to manually wire consumers, serialize messages, etc. If you'd like a higher-level abstraction library, look at [Op-Rabbit](https://github.com/SpinGo/op-rabbit.git) (which uses this library).
+Pekko-RabbitMQ is a low-level library, and leaves it to the coder to manually wire consumers, serialize messages, etc. If you'd like a higher-level abstraction library, look at
+[Op-Rabbit](https://github.com/pjfanning/op-rabbit.git) (which uses akka-rabbitmq).

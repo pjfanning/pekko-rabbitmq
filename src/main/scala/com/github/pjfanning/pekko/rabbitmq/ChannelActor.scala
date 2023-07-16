@@ -1,6 +1,6 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
-import akka.actor.{ Props, ActorRef, FSM }
+import org.apache.pekko.actor.{ Props, ActorRef, FSM }
 import collection.immutable.Queue
 import ConnectionActor.ProvideChannel
 import scala.annotation.tailrec

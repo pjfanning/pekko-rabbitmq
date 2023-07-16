@@ -1,6 +1,6 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
-import akka.actor.{ Props, ActorRef }
+import org.apache.pekko.actor.{ Props, ActorRef }
 
 case class CreateChannel(props: Props, name: Option[String] = None)
 

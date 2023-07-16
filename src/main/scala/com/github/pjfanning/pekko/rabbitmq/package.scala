@@ -1,7 +1,7 @@
-package com.newmotion.akka
+package com.github.pjfanning.pekko
 
-import akka.actor.{ Props, ActorRef }
-import akka.util.Timeout
+import org.apache.pekko.actor.{ Props, ActorRef }
+import org.apache.pekko.util.Timeout
 import scala.concurrent.duration._
 import scala.concurrent.Await
 import com.rabbitmq.{ client => rabbit }
@@ -25,7 +25,7 @@ package object rabbitmq {
 
   implicit class RichConnectionActor(val self: ActorRef) extends AnyVal {
     def createChannel(props: Props, name: Option[String] = None)(implicit timeout: Timeout = Timeout(2.seconds)): ActorRef = {
-      import akka.pattern.ask
+      import org.apache.pekko.pattern.ask
       val future = self ? CreateChannel(props, name)
       Await.result(future, timeout.duration).asInstanceOf[ChannelCreated].channel
     }

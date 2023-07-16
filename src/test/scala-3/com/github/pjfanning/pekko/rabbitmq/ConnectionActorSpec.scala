@@ -1,8 +1,8 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
 import org.specs2.mock.Mockito
-import akka.testkit.TestFSMRef
-import akka.actor.{ ActorRef, Props }
+import org.apache.pekko.testkit.TestFSMRef
+import org.apache.pekko.actor.{ ActorRef, Props }
 import ConnectionActor._
 import com.rabbitmq.client.{ ShutdownListener, ShutdownSignalException }
 import org.mockito.InOrder

@@ -1,10 +1,10 @@
-package com.newmotion.akka.rabbitmq
+package com.github.pjfanning.pekko.rabbitmq
 
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 import org.specs2.specification.core.Fragments
-import akka.actor.ActorSystem
-import akka.testkit.{ ImplicitSender, TestKit }
+import org.apache.pekko.actor.ActorSystem
+import org.apache.pekko.testkit.{ ImplicitSender, TestKit }
 
 abstract class ActorSpec extends Specification {
   implicit val system: ActorSystem = ActorSystem()
