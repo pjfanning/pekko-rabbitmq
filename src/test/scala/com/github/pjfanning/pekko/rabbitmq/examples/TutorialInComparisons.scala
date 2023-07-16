@@ -1,4 +1,5 @@
-package com.github.pjfanning.pekko.rabbitmq.examples
+package com.github.pjfanning.pekko.rabbitmq
+package examples
 
 import org.apache.pekko.actor.{Actor, ActorRef, ActorSystem, Props}
 import com.github.pjfanning.pekko.rabbitmq.{ChannelActor, ConnectionActor}
