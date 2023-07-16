@@ -9,7 +9,7 @@ homepage := Some(new URL("https://github.com/pjfanning/akka-rabbitmq"))
 
 ThisBuild / scalaVersion := "2.13.11"
 
-ThisBuild / crossScalaVersions := Seq("2.13.11", "2.12.17", "3.2.2")
+ThisBuild / crossScalaVersions := Seq("2.13.11", "2.12.18", "3.2.2")
 
 def akka(name: String): ModuleID = "com.typesafe.akka" %% s"akka-$name" % "2.6.+"
 
