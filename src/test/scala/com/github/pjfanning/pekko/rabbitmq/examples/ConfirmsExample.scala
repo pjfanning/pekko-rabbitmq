@@ -1,13 +1,12 @@
-package com.github.pjfanning.pekko.rabbitmq.examples
+package com.github.pjfanning.pekko.rabbitmq
+package examples
 
-import org.apache.pekko.actor.{ActorRef, ActorSystem}
+import org.apache.pekko.actor.{ ActorRef, ActorSystem }
 import org.apache.pekko.pattern.ask
 import org.apache.pekko.util.Timeout
-import com.github.pjfanning.pekko.rabbitmq.{ChannelActor, ChannelCreated, ConnectionActor}
-import com.rabbitmq.client.{ConfirmListener, MessageProperties}
-
+import com.rabbitmq.client.{ MessageProperties, ConfirmListener }
 import scala.collection.mutable
-import scala.concurrent.{Await, ExecutionContext}
+import scala.concurrent.{ Await, ExecutionContext }
 import scala.concurrent.duration._
 
 /**
