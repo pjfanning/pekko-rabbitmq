@@ -1,4 +1,4 @@
-# Akka RabbitMQ client [![Build Status](https://secure.travis-ci.org/NewMotion/akka-rabbitmq.svg)](http://travis-ci.org/NewMotion/akka-rabbitmq)
+# Akka RabbitMQ client
 
 :warning: This project is being ramped down due to Akka's move away from [Open Source](https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka).
 
