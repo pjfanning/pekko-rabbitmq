@@ -1,8 +1,8 @@
 package com.github.pjfanning.pekko.rabbitmq
 package examples
 
-import org.apache.pekko.actor.{ActorRef, ActorSystem}
-import com.github.pjfanning.pekko.rabbitmq.{ChannelActor, ConnectionActor}
+import org.apache.pekko.actor.{ ActorRef, ActorSystem }
+import com.github.pjfanning.pekko.rabbitmq.{ ChannelActor, ConnectionActor }
 
 import concurrent.Future
 import concurrent.ExecutionContext.Implicits.global

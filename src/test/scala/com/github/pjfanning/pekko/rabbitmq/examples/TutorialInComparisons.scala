@@ -1,8 +1,8 @@
 package com.github.pjfanning.pekko.rabbitmq
 package examples
 
-import org.apache.pekko.actor.{Actor, ActorRef, ActorSystem, Props}
-import com.github.pjfanning.pekko.rabbitmq.{ChannelActor, ConnectionActor}
+import org.apache.pekko.actor.{ Actor, ActorRef, ActorSystem, Props }
+import com.github.pjfanning.pekko.rabbitmq.{ ChannelActor, ConnectionActor }
 
 import scala.concurrent.Await
 import scala.concurrent.duration._
