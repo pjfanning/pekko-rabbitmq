@@ -2,8 +2,8 @@
 
 This small library allows you to use [RabbitMQ client](https://www.rabbitmq.com/java-client.html) via [Apache Pekko Actors](https://pekko.apache.org).
 
-This is a fork of [pjfanning/pekko-rabbitmq](https://github.com/pjfanning/pekko-rabbitmq), which itself is a fork of
-[NewMotion/pekko-rabbitmq](https://github.com/NewMotion/pekko-rabbitmq).
+This is a fork of [pjfanning/akka-rabbitmq](https://github.com/pjfanning/akka-rabbitmq), which itself is a fork of
+[NewMotion/akka-rabbitmq](https://github.com/NewMotion/akka-rabbitmq).
 
 It gives you two actors `ConnectionActor` and `ChannelActor`.
 
