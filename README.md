@@ -215,7 +215,7 @@ Tests can be run against a RabbitMQ server on the local machine using a Docker c
 the following command. The RabbitMQ console can be accessible also with http://localhost:8080
 using the login and password of guest and guest. 
 
-      docker run -d --hostname my-rabbit --name some-rabbit -p 8080:15672 -p:5672:5672 rabbitmq:3-management
+      docker run -d -p:5672:5672 rabbitmq:3
 
 ## Changelog
 
