@@ -224,4 +224,4 @@ using the login and password of guest and guest.
 ## Other Libraries
 
 Pekko-RabbitMQ is a low-level library, and leaves it to the coder to manually wire consumers, serialize messages, etc. If you'd like a higher-level abstraction library, look at
-[Op-Rabbit](https://github.com/pjfanning/op-rabbit.git) (which uses akka-rabbitmq).
+[Op-Rabbit](https://github.com/pjfanning/op-rabbit.git).
