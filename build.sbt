@@ -11,7 +11,7 @@ ThisBuild / scalaVersion := "2.13.11"
 
 ThisBuild / crossScalaVersions := Seq("2.13.11", "2.12.18", "3.3.0")
 
-def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.0.0"
+def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.0.1"
 
 libraryDependencies ++= Seq(
   "com.rabbitmq" % "amqp-client" % "5.14.3",
