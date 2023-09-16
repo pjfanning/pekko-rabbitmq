@@ -7,18 +7,18 @@ licenses := Seq(
 
 homepage := Some(new URL("https://github.com/pjfanning/pekko-rabbitmq"))
 
-ThisBuild / scalaVersion := "2.13.11"
+ThisBuild / scalaVersion := "2.13.12"
 
-ThisBuild / crossScalaVersions := Seq("2.13.11", "2.12.18", "3.3.0")
+ThisBuild / crossScalaVersions := Seq("2.13.12", "2.12.18", "3.3.1")
 
 def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.0.1"
 
 libraryDependencies ++= Seq(
-  "com.rabbitmq" % "amqp-client" % "5.14.3",
+  "com.rabbitmq" % "amqp-client" % "5.18.0",
   pekko("actor") % "provided",
   pekko("testkit") % "test",
   "com.typesafe" % "config" % "1.4.2" % Test,
-  ("org.specs2" %% "specs2-mock" % "4.13.3" % Test).cross(CrossVersion.for3Use2_13)
+  ("org.specs2" %% "specs2-mock" % "4.20.2" % Test).cross(CrossVersion.for3Use2_13)
 )
 
 val scalaReleaseVersion = SettingKey[Int]("scalaReleaseVersion")
@@ -36,7 +36,7 @@ Test / unmanagedSourceDirectories ++= {
     )
   } else {
     Seq(
-      (LocalRootProject / baseDirectory).value / "src" / "test" / s"scala-2"
+      (LocalRootProject / baseDirectory).value / "src" / "test" / "scala-2"
     )
   }
 }
