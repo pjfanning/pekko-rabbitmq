@@ -7,11 +7,11 @@ licenses := Seq(
 
 homepage := Some(new URL("https://github.com/pjfanning/pekko-rabbitmq"))
 
-ThisBuild / scalaVersion := "2.13.12"
+ThisBuild / scalaVersion := "2.13.14"
 
-ThisBuild / crossScalaVersions := Seq("2.13.12", "2.12.18", "3.3.1")
+ThisBuild / crossScalaVersions := Seq("2.13.14", "2.12.20", "3.3.3")
 
-def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.0.2"
+def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.0.3"
 
 libraryDependencies ++= Seq(
   "com.rabbitmq" % "amqp-client" % "5.21.0",
