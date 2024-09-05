@@ -18,6 +18,7 @@ libraryDependencies ++= Seq(
   pekko("actor") % "provided",
   pekko("testkit") % "test",
   "com.typesafe" % "config" % "1.4.3" % Test,
+  "org.specs2" %% "specs2-core" % "4.20.8" % Test,
   ("org.specs2" %% "specs2-mock" % "4.20.8" % Test).cross(CrossVersion.for3Use2_13)
 )
 
