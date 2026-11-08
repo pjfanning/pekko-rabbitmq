@@ -5,42 +5,22 @@ licenses := Seq(
   ("Apache License, Version 2.0",
    url("http://www.apache.org/licenses/LICENSE-2.0")))
 
-homepage := Some(new URL("https://github.com/pjfanning/pekko-rabbitmq"))
+homepage := Some(url("https://github.com/pjfanning/pekko-rabbitmq"))
 
-ThisBuild / scalaVersion := "2.13.14"
+ThisBuild / scalaVersion := "2.13.18"
 
-ThisBuild / crossScalaVersions := Seq("2.13.14", "2.12.20", "3.3.3")
+ThisBuild / crossScalaVersions := Seq("2.13.18", "2.12.21", "3.3.9")
 
-def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.1.1"
+def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.7.1"
 
 libraryDependencies ++= Seq(
-  "com.rabbitmq" % "amqp-client" % "5.21.0",
+  "com.rabbitmq" % "amqp-client" % "5.37.1",
   pekko("actor") % "provided",
   pekko("testkit") % "test",
-  "com.typesafe" % "config" % "1.4.3" % Test,
-  "org.specs2" %% "specs2-core" % "4.20.8" % Test,
-  ("org.specs2" %% "specs2-mock" % "4.20.8" % Test).cross(CrossVersion.for3Use2_13)
+  "com.typesafe" % "config" % "1.4.10" % Test,
+  "org.specs2" %% "specs2-core" % "4.23.0" % Test,
+  "org.mockito" % "mockito-core" % "5.24.0" % Test
 )
-
-val scalaReleaseVersion = SettingKey[Int]("scalaReleaseVersion")
-scalaReleaseVersion := {
-  val v = scalaVersion.value
-  CrossVersion.partialVersion(v).map(_._1.toInt).getOrElse {
-    throw new RuntimeException(s"could not get Scala release version from $v")
-  }
-}
-
-Test / unmanagedSourceDirectories ++= {
-  if (scalaReleaseVersion.value > 2) {
-    Seq(
-      (LocalRootProject / baseDirectory).value / "src" / "test" / "scala-3"
-    )
-  } else {
-    Seq(
-      (LocalRootProject / baseDirectory).value / "src" / "test" / "scala-2"
-    )
-  }
-}
 
 Format.settings
 
@@ -60,10 +40,10 @@ scmInfo := Some(
 )
 
 publishMavenStyle := true
+// Sonatype Central Portal publishing (built into sbt 1.11+)
+// release: sbt +publishSigned sonaRelease
 publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+  val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
+  if (isSnapshot.value) Some("central-snapshots" at centralSnapshots)
+  else localStaging.value
 }

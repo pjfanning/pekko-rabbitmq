@@ -1,6 +1,7 @@
 package com.github.pjfanning.pekko.rabbitmq
 
-import org.specs2.mock.Mockito
+import org.mockito.ArgumentMatchers.any
+import org.mockito.Mockito._
 import org.apache.pekko.testkit.TestFSMRef
 import org.apache.pekko.actor.ActorRef
 import ChannelActor._
@@ -10,30 +11,28 @@ import collection.immutable.Queue
 import java.io.IOException
 import ConnectionActor.ProvideChannel
 
-import scala.reflect.ClassTag
-
 /**
  * @author Yaroslav Klymko
  */
-class ChannelActorSpec extends ActorSpec with Mockito {
+class ChannelActorSpec extends ActorSpec {
   "ChannelActor" should {
     "setup channel when channel received" in new TestScope {
       actorRef ! channel
       state mustEqual connected()
-      there was one(setupChannel).apply(channel, actorRef)
-      there was one(channel).addShutdownListener(actor)
+      verify(setupChannel).apply(channel, actorRef)
+      verify(channel).addShutdownListener(actor)
     }
     "close channel if received unexpectedly" in new TestScope {
       actorRef.setState(Connected, Connected(channel))
-      val newChannel: Channel = mock[Channel]
+      val newChannel: Channel = mock(classOf[Channel])
       actorRef ! newChannel
-      there was one(newChannel).close()
+      verify(newChannel).close()
       state mustEqual connected(channel)
     }
     "process message if has channel" in new TestScope {
       actorRef.setState(Connected, Connected(channel))
       actorRef ! ChannelMessage(onChannel)
-      there was one(onChannel).apply(channel)
+      verify(onChannel).apply(channel)
       state mustEqual connected()
     }
     "process message if has channel, and when fails but channel is still open, drops the message and reconnects" in new TestScope {
@@ -94,14 +93,14 @@ class ChannelActorSpec extends ActorSpec with Mockito {
     "process queued channel messages when channel received" in new TestScope {
       actorRef.setState(Disconnected, InMemory(Queue(onChannel, onChannel)))
       actorRef ! channel
-      there was two(onChannel).apply(channel)
+      verify(onChannel, times(2)).apply(channel)
       state mustEqual connected()
     }
     "process queued channel messages when channel received and failed" in new TestScope {
-      val last: OnChannel = mock[OnChannel]
+      val last: OnChannel = mock(classOf[OnChannel])
       actorRef.setState(Disconnected, InMemory(Queue(onChannel, onChannelFailure, last)))
       actorRef ! channel
-      there was one(onChannel).apply(channel)
+      verify(onChannel).apply(channel)
       state mustEqual disconnected(last)
     }
     "respond to GetState message" in new TestScope {
@@ -118,23 +117,23 @@ class ChannelActorSpec extends ActorSpec with Mockito {
   }
 
   private abstract class TestScope extends ActorScope {
-    val setupChannel: (Channel, ActorRef) => Unit = mock[(Channel, ActorRef) => Unit](ClassTag(classOf[(Channel, ActorRef) => Unit]))
-    val onChannel: OnChannel = mock[OnChannel]
+    val setupChannel: (Channel, ActorRef) => Unit = mock(classOf[(Channel, ActorRef) => Unit])
+    val onChannel: OnChannel = mock(classOf[OnChannel])
     val channel: Channel = {
-      val channel = mock[Channel]
-      channel.isOpen returns true
+      val channel = mock(classOf[Channel])
+      when(channel.isOpen).thenReturn(true)
       channel
     }
     val closedChannel: Channel = {
-      val channel = mock[Channel]
-      channel.isOpen returns false
+      val channel = mock(classOf[Channel])
+      when(channel.isOpen).thenReturn(false)
       channel
     }
-    val channelShutdownSignal: ShutdownSignalException = mock[ShutdownSignalException]
-    channelShutdownSignal.getReference returns channel
+    val channelShutdownSignal: ShutdownSignalException = mock(classOf[ShutdownSignalException])
+    when(channelShutdownSignal.getReference).thenReturn(channel, Nil: _*)
 
-    val connectionShutdownSignal: ShutdownSignalException = mock[ShutdownSignalException]
-    connectionShutdownSignal.getReference returns mock[Connection]
+    val connectionShutdownSignal: ShutdownSignalException = mock(classOf[ShutdownSignalException])
+    when(connectionShutdownSignal.getReference).thenReturn(mock(classOf[Connection]), Nil: _*)
 
     val actorRef: TestFSMRef[State, Data, TestChannelActor] = TestFSMRef(new TestChannelActor)
 
