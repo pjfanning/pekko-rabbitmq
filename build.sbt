@@ -19,28 +19,8 @@ libraryDependencies ++= Seq(
   pekko("testkit") % "test",
   "com.typesafe" % "config" % "1.4.10" % Test,
   "org.specs2" %% "specs2-core" % "4.23.0" % Test,
-  ("org.specs2" %% "specs2-mock" % "4.23.0" % Test).cross(CrossVersion.for3Use2_13).excludeAll(ExclusionRule("org.specs2"))
+  "org.mockito" % "mockito-core" % "5.24.0" % Test
 )
-
-val scalaReleaseVersion = SettingKey[Int]("scalaReleaseVersion")
-scalaReleaseVersion := {
-  val v = scalaVersion.value
-  CrossVersion.partialVersion(v).map(_._1.toInt).getOrElse {
-    throw new RuntimeException(s"could not get Scala release version from $v")
-  }
-}
-
-Test / unmanagedSourceDirectories ++= {
-  if (scalaReleaseVersion.value > 2) {
-    Seq(
-      (LocalRootProject / baseDirectory).value / "src" / "test" / "scala-3"
-    )
-  } else {
-    Seq(
-      (LocalRootProject / baseDirectory).value / "src" / "test" / "scala-2"
-    )
-  }
-}
 
 Format.settings
 
