@@ -9,9 +9,11 @@ homepage := Some(url("https://github.com/pjfanning/pekko-rabbitmq"))
 
 ThisBuild / scalaVersion := "2.13.18"
 
-ThisBuild / crossScalaVersions := Seq("2.13.18", "2.12.21", "3.3.9")
+ThisBuild / crossScalaVersions := Seq("2.13.18", "3.3.9")
 
-def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "1.7.1"
+scalacOptions ++= Seq("-release", "17")
+
+def pekko(name: String): ModuleID = "org.apache.pekko" %% s"pekko-$name" % "2.0.0"
 
 libraryDependencies ++= Seq(
   "com.rabbitmq" % "amqp-client" % "5.37.1",
